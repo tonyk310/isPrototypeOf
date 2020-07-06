@@ -1,0 +1,126 @@
+<script src="simpleTest.js"></script>
+<script>
+
+'use strict'
+
+/*
+
+Reduce
+
+Syntax
+
+Parameters
+
+
+Return Value
+
+Prototype
+
+function isPrototypeOf(parent, child) {
+	
+	var returnValueOfisPrototypeOf = false;
+	var prototype = Object.getPrototypeOf(child);
+	if (prototype === null) {
+		return returnValueOfisPrototypeOf;
+	}	
+	// base case
+	if (parent === prototype) {
+		return (true);
+	// recursive case
+	} else {
+		returnValueOfisPrototypeOf = isPrototypeOf(parent, prototype);	
+	}
+
+	return returnValueOfisPrototypeOf;
+}
+
+Tests
+
+
+
+*/
+
+function isPrototypeOf(parent, child) {
+	
+	var returnValueOfisPrototypeOf = false;
+	var prototype = Object.getPrototypeOf(child);
+	if (prototype === null) {
+		return returnValueOfisPrototypeOf;
+	}	
+	// base case
+	if (parent === prototype) {
+		return (true);
+	// recursive case
+	} else {
+		returnValueOfisPrototypeOf = isPrototypeOf(parent, prototype);	
+	}
+
+	return returnValueOfisPrototypeOf;
+}
+
+tests({
+	
+	'It should return false if the child object is not a prototype of the parent object.': function() {
+
+		var dog = {
+			bark: function() {
+				console.log("Bark!");
+			}
+		};
+		var empty = Object.create(null);
+		var returnValueOfisPrototypeOf = isPrototypeOf(dog, empty);
+		eq(returnValueOfisPrototypeOf, false);
+
+	},
+
+	'It should return true if the child object is a prototype of the parent object.': function() {
+
+		var dog = {
+			bark: function() {
+				console.log("Bark!");
+			}
+		};
+		var snoopy = Object.create(dog);
+
+		var returnValueOfisPrototypeOf = isPrototypeOf(dog, snoopy);
+		eq(returnValueOfisPrototypeOf, true);
+
+	},
+
+	'It should return true for any number of prototype links ': function() {
+
+		var canine = {
+			bark: function() {
+				console.log("Bark!");
+			}
+		};
+		var dog = Object.create(canine);
+		var snoopy = Object.create(dog);
+
+		var returnValueOfisPrototypeOf = isPrototypeOf(canine, snoopy);
+		eq(returnValueOfisPrototypeOf, true);
+	},
+
+	'It should return true for any object created from the Object.prototype': function() {
+
+		var canine = {
+			bark: function() {
+				console.log("Bark!");
+			}
+		};
+		var dog = Object.create(canine);
+		var snoopy = Object.create(dog);		
+
+		var returnValueOfisPrototypeOf = isPrototypeOf(Object.prototype, snoopy);
+		eq(returnValueOfisPrototypeOf, true);		
+
+	},
+
+
+});
+
+
+
+
+
+</script>
